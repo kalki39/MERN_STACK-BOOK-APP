@@ -103,6 +103,7 @@ app.post("/registration", async (req, res) => {
       email: email,
       password: hashPassword,
       username: username,
+      emailAuthenticated: false,
     });
 
     try {

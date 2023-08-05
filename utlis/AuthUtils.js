@@ -64,15 +64,22 @@ const sendVerficiationToken = async ({ email, verificationToken, req }) => {
     html: `<p>Verify your email!!</p>\n\n Click <a href=${reqUrl}>Here!!</a> to verify`,
   };
 
-  await new Promise((resolve, reject) => {
+  // await new Promise((resolve, reject) => {
+  try {
     transpoter.sendMail(mailOptions, (err, info) => {
-      if (err) {
-        console.error(err);
-      } else {
-        resolve(info);
-      }
+      if (err) throw err;
+      console.log("Mail sent succeessfully");
+      // if (err) {
+      //   console.error(err);
+      // } else {
+      //   resolve(info);
+      // }
     });
-  });
+  } catch (error) {
+    console.log("ee" + error);
+  }
+
+  // });
   // transpoter.sendMail(mailOptions, function (err, response) {
   //   if (err) throw err;
   //   console.log("Mail sent succeessfully");
