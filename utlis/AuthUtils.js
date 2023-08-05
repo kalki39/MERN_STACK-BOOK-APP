@@ -40,7 +40,7 @@ const genrateJWTToken = (email) => {
   return JWT_TOKEN;
 };
 
-const sendVerficiationToken = ({ email, verificationToken, req }) => {
+const sendVerficiationToken = async ({ email, verificationToken, req }) => {
   //nodemailer
   const transpoter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -64,10 +64,20 @@ const sendVerficiationToken = ({ email, verificationToken, req }) => {
     html: `<p>Verify your email!!</p>\n\n Click <a href=${reqUrl}>Here!!</a> to verify`,
   };
 
-  transpoter.sendMail(mailOptions, function (err, response) {
-    if (err) throw err;
-    console.log("Mail sent succeessfully");
+  await new Promise((resolve, reject) => {
+    transpoter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        resolve(info);
+      }
+    });
   });
+  // transpoter.sendMail(mailOptions, function (err, response) {
+  //   if (err) throw err;
+  //   console.log("Mail sent succeessfully");
+  // });
 };
 
 const sendPasswordToken = ({ email, passwordToken, newPassword, req }) => {

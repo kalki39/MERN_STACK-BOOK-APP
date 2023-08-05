@@ -20,6 +20,11 @@ const userSchema = new Schema({
     type: String,
     require: true,
   },
+  emailAuthenticated: {
+    type: Boolean,
+    require: true,
+    default: false,
+  },
   telephone: {
     type: String,
     require: false,

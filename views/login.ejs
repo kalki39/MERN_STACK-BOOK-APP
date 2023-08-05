@@ -47,12 +47,13 @@
   <body>
     <center><h1>Login Form</h1></center>
     <div class="container">
-      <form action="/login" method="POST">
+      <form action="/login" method="post">
         <label for="loginId">Email or Username : </label>
         <input
           type="text"
           placeholder="Enter Email or Username"
           name="loginId"
+          id="loginId"
           required
         />
         <label for="password">Password : </label>
@@ -60,9 +61,10 @@
           type="password"
           placeholder="Enter Password"
           name="password"
+          id="password"
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit" id="login">Login</button>
       </form>
       <form>
         <button id="forgetbtn">Forget password</button>
@@ -73,21 +75,30 @@
     </div>
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
     <script>
-      // document
-      //   .getElementsByClassName("register")
-      //   .addEventListener("click", () => {
-      //     console.log("okk");
-      //   });
-      // function reg() {
+      // let login = document.getElementById("login");
+
+      // login.addEventListener("click", (e) => {
+      //   e.preventDefault();
+      //   let loginId = document.getElementById("loginId").value;
+      //   let password = document.getElementById("password").value;
       //   axios
-      //     .get("/register")
+      //     .post("/login", { loginId, password })
       //     .then((res) => {
+      //       // let { data } = res.data;
       //       console.log(res);
+      //       if (res.data.status == 400) {
+      //         alert(res.data.message);
+      //         return;
+      //       }
+      //       window.location.href = `${window.location.host}/dashboard`;
+      //       return;
       //     })
       //     .catch((err) => {
       //       console.log(err);
+      //       alert(err);
       //     });
-      // }
+      // });
+
       let forgetbtn = document.getElementById("forgetbtn");
       forgetbtn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -105,24 +116,7 @@
 
             alert(res.data.message);
             return;
-
-            // let newPassword = prompt("Enter your new password");
-
-            // return newPassword;
-
-            // if (res.data.status !== 200) {
-            //   alert(res.data.message);
-            //   return;
-            // }
-
-            // event.target.parentElement.parentElement.querySelector(
-            //   ".item-text"
-            // ).innerHTML = newData;
           })
-          // .then((newPassword) => {
-          //   console.log(newPassword);
-          //   return;
-          // })
           .catch((err) => {
             console.log(err);
             alert(err);

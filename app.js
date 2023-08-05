@@ -207,6 +207,13 @@ app.post("/login", async (req, res) => {
       });
     }
 
+    if (userDb.emailAuthenticated === false) {
+      return res.send({
+        status: 400,
+        message: "Email not authenticated",
+      });
+    }
+
     //password compare bcrypt.compare
     const isMatch = await bcrypt.compare(password, userDb.password);
 
@@ -215,6 +222,9 @@ app.post("/login", async (req, res) => {
         status: 400,
         message: "Password Does not match",
       });
+      // res.render("login.ejs", {
+      //   errorMessage: "Password Does not match",
+      // });
     }
 
     //Add session base auth sys
@@ -372,10 +382,10 @@ app.post("/create-item", isAuthMiddleware, rateLimiting, async (req, res) => {
   //ratelimit is middleware it limit
   console.log(req.body); // 2 sec to create new todo
 
-  const { tittle, author, price, category } = req.body; ///book is from user client
+  const { tittle, author, prize, category } = req.body; ///book is from user client
 
   //data validation
-  if (!tittle || !author || !price || !category) {
+  if (!tittle || !author || !prize || !category) {
     return res.send({
       status: 400,
       message: "missing credential",
@@ -387,7 +397,7 @@ app.post("/create-item", isAuthMiddleware, rateLimiting, async (req, res) => {
   const todo = new todoSchema({
     tittle,
     author,
-    price,
+    prize,
     category,
     username: req.session.user.username,
   });
@@ -412,34 +422,40 @@ app.post("/create-item", isAuthMiddleware, rateLimiting, async (req, res) => {
 app.post("/edit-item", isAuthMiddleware, async (req, res) => {
   console.log(req.body);
 
-  const { id, newData } = req.body; /// using id we search in db and update the todo
+  const { id, tittle, author, prize, category } = req.body; /// using id we search in db and update the todo
 
   //data validation
-  if (!id || !newData) {
+  if (!id || !tittle || !author || !prize || !category) {
     return res.send({
       status: 400,
       message: "missing credential",
     });
   }
 
-  if (typeof newData != "string") {
-    return res.send({
-      status: 400,
-      message: "invalid input",
-    });
-  }
+  // if (typeof newData != "string") {
+  //   return res.send({
+  //     status: 400,
+  //     message: "invalid input",
+  //   });
+  // }
 
-  if (newData.length > 100) {
-    return res.send({
-      status: 400,
-      message: "input length is too long",
-    });
-  }
+  // if (newData.length > 100) {
+  //   return res.send({
+  //     status: 400,
+  //     message: "input length is too long",
+  //   });
+  // }
 
   try {
     const tododb = await todoSchema.findByIdAndUpdate(
       { _id: id },
-      { todo: newData }
+      {
+        tittle,
+        author,
+        prize,
+        category,
+        username: req.session.user.username,
+      }
     );
 
     return res.send({
@@ -515,7 +531,7 @@ app.get("/read-item", async (req, res) => {
 //pagination_dashboard?skip=10
 app.get("/pagination_dashboard", isAuthMiddleware, async (req, res) => {
   const skip = req.query.skip || 0; //client
-  const LIMIT = 5; //backend
+  const LIMIT = 10; //backend
 
   const user_name = req.session.user.username;
 

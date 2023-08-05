@@ -12,7 +12,7 @@ const todoSchema = new Schema({
     type: String,
     require: true,
   },
-  price: {
+  prize: {
     type: String,
     require: true,
   },
