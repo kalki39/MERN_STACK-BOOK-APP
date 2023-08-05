@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login Page</title>
+    <style>
+      Body {
+        font-family: Calibri, Helvetica, sans-serif;
+        background-color: pink;
+      }
+      button {
+        background-color: #4caf50;
+        width: 100%;
+        color: rgb(19, 18, 17);
+        padding: 15px;
+        margin: 10px 0px;
+        border: none;
+        cursor: pointer;
+      }
+      form {
+        border: 3px solid #f1f1f1;
+      }
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        margin: 8px 0;
+        padding: 12px 20px;
+        display: inline-block;
+        border: 2px solid green;
+        box-sizing: border-box;
+      }
+      button:hover {
+        opacity: 0.7;
+      }
+      .cancelbtn {
+        width: auto;
+        padding: 10px 18px;
+        margin: 10px 5px;
+      }
+
+      .container {
+        padding: 25px;
+        background-color: lightblue;
+      }
+    </style>
+  </head>
+  <body>
+    <center><h1>Login Form</h1></center>
+    <div class="container">
+      <form action="/login" method="POST">
+        <label for="loginId">Email or Username : </label>
+        <input
+          type="text"
+          placeholder="Enter Email or Username"
+          name="loginId"
+          required
+        />
+        <label for="password">Password : </label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          name="password"
+          required
+        />
+        <button type="submit">Login</button>
+      </form>
+      <form>
+        <button id="forgetbtn">Forget password</button>
+      </form>
+      <form action="/registration" method="GET">
+        <button>Register</button>
+      </form>
+    </div>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <script>
+      // document
+      //   .getElementsByClassName("register")
+      //   .addEventListener("click", () => {
+      //     console.log("okk");
+      //   });
+      // function reg() {
+      //   axios
+      //     .get("/register")
+      //     .then((res) => {
+      //       console.log(res);
+      //     })
+      //     .catch((err) => {
+      //       console.log(err);
+      //     });
+      // }
+      let forgetbtn = document.getElementById("forgetbtn");
+      forgetbtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        let email = prompt("Enter your register email id");
+        let newPassword = prompt("Enter your new password");
+        axios
+          .post("/forgetPassword", { email, newPassword })
+          .then((res) => {
+            // let { data } = res.data;
+            console.log(res);
+            if (res.data.status !== 200) {
+              alert(res.data.message);
+              return;
+            }
+
+            alert(res.data.message);
+            return;
+
+            // let newPassword = prompt("Enter your new password");
+
+            // return newPassword;
+
+            // if (res.data.status !== 200) {
+            //   alert(res.data.message);
+            //   return;
+            // }
+
+            // event.target.parentElement.parentElement.querySelector(
+            //   ".item-text"
+            // ).innerHTML = newData;
+          })
+          // .then((newPassword) => {
+          //   console.log(newPassword);
+          //   return;
+          // })
+          .catch((err) => {
+            console.log(err);
+            alert(err);
+          });
+        console.log("clicked");
+      });
+    </script>
+  </body>
+</html>

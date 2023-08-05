@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book App</title>
+    <style>
+      body {
+        font-family: Calibri, Helvetica, sans-serif;
+        background-color: #1f1f1f !important;
+        color: white;
+      }
+      #col1 {
+        margin: 5px;
+        margin-top: 1rem;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="display-4 text-center py-1">To-Do App</h1>
+
+      <div class="jumbotron p-3 shadow-sm">
+        <form id="create_form">
+          <div class="d-flex align-items-center">
+            <div id="col">
+              <label for="tittle">Tittle</label><br />
+              <input
+                id="tittle"
+                name="tittle"
+                autofocus
+                autocomplete="off"
+                class="form-control mr-3"
+                type="text"
+                style="flex: 1"
+              />
+            </div>
+            <div id="col">
+              <label for="author">Author</label><br />
+              <input
+                id="author"
+                name="author"
+                autofocus
+                autocomplete="off"
+                class="form-control mr-3"
+                type="text"
+                style="flex: 1"
+              />
+            </div>
+            <div id="col">
+              <label for="price">Prize</label><br />
+              <input
+                id="price"
+                name="price"
+                autofocus
+                autocomplete="off"
+                class="form-control mr-3"
+                type="text"
+                style="flex: 1"
+              />
+            </div>
+            <div id="col">
+              <label for="category">Category</label><br />
+              <input
+                id="category"
+                name="category"
+                autofocus
+                autocomplete="off"
+                class="form-control mr-3"
+                type="text"
+                style="flex: 1"
+              />
+            </div>
+            <div id="col1">
+              <button class="add_item btn btn-primary">Add Book</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div id="item_list" class="d-flex justify-content-around"></div>
+
+      <button class="show_more btn btn-warning mb-3">Show More</button>
+
+      <form action="/logout" method="POST">
+        <button class="mb-3 btn btn-success">Logout</button>
+      </form>
+
+      <form action="/logout_from_all_devices" method="POST">
+        <button class="mb-3 btn btn-success">Logout from all devices</button>
+      </form>
+    </div>
+
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ejs@3.1.9/ejs.min.js"></script>
+    <script src="/browser.js"></script>
+  </body>
+</html>
