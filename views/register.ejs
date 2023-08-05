@@ -46,7 +46,7 @@
   </head>
   <body>
     <center><h1>Register Form</h1></center>
-    <form>
+    <form action="/registration" method="POST">
       <div class="container">
         <label for="name">Name : </label>
         <input
@@ -81,38 +81,38 @@
           id="password"
           required
         />
-        <button id="register">Register</button>
+        <button type="submit">Register</button>
       </div>
     </form>
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
     <script>
-      let resigter = document.getElementById("register");
+      // let resigter = document.getElementById("register");
 
-      resigter.addEventListener("click", (e) => {
-        e.preventDefault();
-        let name = document.getElementById("name").value;
-        let email = document.getElementById("email").value;
-        let username = document.getElementById("username").value;
-        let password = document.getElementById("password").value;
-        axios
-          .post("/registration", { name, email, username, password })
-          .then((res) => {
-            // let { data } = res.data;
-            console.log(res);
-            // if (res.data.status !== 200) {
-            //   alert(res.data.message);
-            //   return;
-            // }
+      // resigter.addEventListener("click", (e) => {
+      //   e.preventDefault();
+      //   let name = document.getElementById("name").value;
+      //   let email = document.getElementById("email").value;
+      //   let username = document.getElementById("username").value;
+      //   let password = document.getElementById("password").value;
+      //   axios
+      //     .post("/registration", { name, email, username, password })
+      //     .then((res) => {
+      //       // let { data } = res.data;
+      //       console.log(res);
+      //       // if (res.data.status !== 200) {
+      //       //   alert(res.data.message);
+      //       //   return;
+      //       // }
 
-            alert(res.data.message);
-            return;
-          })
-          .catch((err) => {
-            console.log(err);
-            alert(err);
-          });
-        console.log(name);
-        console.log(email);
+      //       alert(res.data.message);
+      //       return;
+      //     })
+      //     .catch((err) => {
+      //       console.log(err);
+      //       alert(err);
+      //     });
+      //   console.log(name);
+      //   console.log(email);
       });
     </script>
   </body>

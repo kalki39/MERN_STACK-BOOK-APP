@@ -103,25 +103,25 @@ app.post("/registration", async (req, res) => {
       email: email,
       password: hashPassword,
       username: username,
-      emailAuthenticated: false,
+      emailAuthenticated: true,
     });
 
     try {
       const userDb = await user.save();
       console.log(userDb);
       //token genrate
-      const verificationToken = genrateJWTToken(email);
-      console.log(verificationToken);
-      //sent mail function
-      sendVerficiationToken({ email, verificationToken, req });
+      // const verificationToken = genrateJWTToken(email);
+      // console.log(verificationToken);
+      // //sent mail function
+      // sendVerficiationToken({ email, verificationToken, req });
 
       console.log(userDb);
-      return res.send({
-        status: 200,
-        message:
-          "Registeration Successfull, Link has been sent to your mail id. Please verify before login",
-      });
-      // return res.redirect("/login");
+      // return res.send({
+      //   status: 200,
+      //   message:
+      //     "Registeration Successfull, Link has been sent to your mail id. Please verify before login",
+      // });
+      return res.redirect("/login");
       // return res.send({
       //   status: 201,
       //   message: "User register successfully",
