@@ -58,7 +58,7 @@ const sendVerficiationToken = async ({ email, verificationToken, req }) => {
   )}/api/${verificationToken}`;
 
   const mailOptions = {
-    from: "Book App pvt lt",
+    from: "kalkiram40@gmail.com",
     to: email,
     subject: "Email verfication for Book App",
     html: `<p>Verify your email!!</p>\n\n Click <a href=${reqUrl}>Here!!</a> to verify`,
@@ -68,7 +68,6 @@ const sendVerficiationToken = async ({ email, verificationToken, req }) => {
     transpoter.sendMail(mailOptions, (err, info) => {
       if (err) {
         console.error(err);
-        reject(err);
       } else {
         resolve(info);
       }
@@ -98,7 +97,7 @@ const sendPasswordToken = ({ email, passwordToken, newPassword, req }) => {
   )}/reset/${passwordToken}/${newPassword}`;
 
   const mailOptions = {
-    from: "Book App pvt lt",
+    from: "kalkiram40@gmail.com",
     to: email,
     subject: "Reset Password for Book App",
     html: `<p>Reset your password!!</p>\n\n Click <a href=${reqUrl}>Here!!</a>`,

@@ -127,6 +127,7 @@ app.post("/registration", async (req, res) => {
       //   data: userDb,
       // });
     } catch (error) {
+      console.log(error);
       return res.send({
         status: 500,
         message: "Database error",
