@@ -4,6 +4,7 @@ const session = require("express-session");
 const mongoDbSession = require("connect-mongodb-session")(session);
 const clc = require("cli-color");
 const bcrypt = require("bcrypt");
+const bodyParser = require("body-parser");
 const {
   cleanUpAndValidate,
   sendVerficiationToken,
@@ -28,7 +29,9 @@ const MONGO_URI =
 
 //middleware it convert res.body from binary to json
 app.use(express.json());
-app.use(express.urlencoded({ extend: true }));
+// app.use(bodyParser.json()); // to support JSON-encoded bodies
+// app.use(bodyParser.urlencoded()); // to support URL-encoded bodies
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 //middleware for session id
