@@ -47,7 +47,8 @@
   <body>
     <center><h1>Login Form</h1></center>
     <div class="container">
-      <form action="/login" method="post">
+      <!-- <form action="/login" method="post"> -->
+      <form>
         <label for="loginId">Email or Username : </label>
         <input
           type="text"
@@ -75,29 +76,31 @@
     </div>
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
     <script>
-      // let login = document.getElementById("login");
+      let login = document.getElementById("login");
 
-      // login.addEventListener("click", (e) => {
-      //   e.preventDefault();
-      //   let loginId = document.getElementById("loginId").value;
-      //   let password = document.getElementById("password").value;
-      //   axios
-      //     .post("/login", { loginId, password })
-      //     .then((res) => {
-      //       // let { data } = res.data;
-      //       console.log(res);
-      //       if (res.data.status == 400) {
-      //         alert(res.data.message);
-      //         return;
-      //       }
-      //       window.location.href = `${window.location.host}/dashboard`;
-      //       return;
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //       alert(err);
-      //     });
-      // });
+      login.addEventListener("click", (e) => {
+        e.preventDefault();
+        let loginId = document.getElementById("loginId").value;
+        let password = document.getElementById("password").value;
+        axios
+          .post("/login", { loginId, password })
+          .then((res) => {
+            // let { data } = res.data;
+            console.log(res);
+            if (res.data.status == 400) {
+              alert(res.data.message);
+              return;
+            }
+            window.location.replace(
+              `https://mernstack-book-app-production.up.railway.app/dashboard`
+            );
+            return;
+          })
+          .catch((err) => {
+            console.log(err);
+            alert(err);
+          });
+      });
 
       let forgetbtn = document.getElementById("forgetbtn");
       forgetbtn.addEventListener("click", (e) => {

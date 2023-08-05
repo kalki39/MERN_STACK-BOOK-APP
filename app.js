@@ -121,12 +121,12 @@ app.post("/registration", async (req, res) => {
       //   message:
       //     "Registeration Successfull, Link has been sent to your mail id. Please verify before login",
       // });
-      return res.redirect("/login");
-      // return res.send({
-      //   status: 201,
-      //   message: "User register successfully",
-      //   data: userDb,
-      // });
+      // return res.redirect("/login");
+      return res.send({
+        status: 200,
+        message: "User register successfully",
+        data: userDb,
+      });
     } catch (error) {
       console.log(error);
       return res.send({
@@ -238,11 +238,11 @@ app.post("/login", async (req, res) => {
       userId: userDb._id,
     };
 
-    // return res.send({
-    //   status: 200,
-    //   message: "Login Successfull",
-    // });
-    return res.redirect("/dashboard");
+    return res.send({
+      status: 200,
+      message: "Login Successfull",
+    });
+    // return res.redirect("/dashboard");
   } catch (error) {
     console.log(error);
     return res.send({
